@@ -163,56 +163,151 @@ void Task19()
 }
 
 ////// Задача 21 Напишите программу, которая принимает на вход координаты двух точек и находит расстояние между ними в 3D пространстве.
-//        void Coordinate(ref double x, ref double y, ref double z)
-//        {
-//         string t2 = Console.ReadLine();
-//         string[] splitString2 = t2.Split(' ');
-//          x = Convert.ToDouble(splitString2[0]);
-//         y = Convert.ToDouble(splitString2[1]);
-//         z= Convert.ToDouble(splitString2[2]);     
-//        }
+void Task21()
+{
+    void Coordinate(ref double x, ref double y, ref double z)
+    {
+        string? line;
+        while ((line = Console.ReadLine()) == null) line = Console.ReadLine();
+        string[] splitString = line.Split(' ');
+        x = Convert.ToDouble(splitString[0]);
+        y = Convert.ToDouble(splitString[1]);
+        z = Convert.ToDouble(splitString[2]);
+    }
+    Console.Clear();
+    Console.WriteLine("Задача 21 Напишите программу, которая принимает на вход координаты двух точек и находит расстояние между ними в 3D пространстве.");
+    Console.WriteLine("Введите координаты точки A x1 y1 z1 через пробел");
+    Double x1 = 0, y1 = 0, z1 = 0;
+    Coordinate(ref x1, ref y1, ref z1);
+    Console.WriteLine("Введите координаты1 точки B x2 y2 z2 через пробел");
+    Double x2 = 0, y2 = 0, z2 = 0;
+    Coordinate(ref x2, ref y2, ref z2);
+    double result = Math.Round(Math.Pow(Math.Pow(x2 - x1, 2) + Math.Pow(y2 - y1, 2) + Math.Pow(z2 - z1, 2) * 1.0, 0.5), 2);
+    Console.WriteLine($"Расстояние между двумя точками в 3D пространстве: {result}");
+}
 
-//         WriteL("Введите координаты точки A x1 y1 z1 через пробел");
-//         Double x1 = 0;
-//         Double y1 = 0;
-//         Double z1 = 0;
-//         Coordinate(ref x1, ref y1, ref z1);
-//         WriteL("Введите координаты1 точки B x2 y2 z2 через пробел");
-//         Double x2 = 0;
-//         Double y2 = 0;
-//         Double z2 = 0;
-//         Coordinate(ref x2, ref y2, ref z2);
-//         double result = Math.Round(Math.Pow(Math.Pow(x2 - x1, 2) + Math.Pow(y2 - y1, 2) + Math.Pow(z2 - z1, 2) * 1.0, 0.5), 2);
-//         WriteL($"Расстояние между двумя точками в 3D пространстве: {result}");
-//     }
-// }
+////Задача 23 Напишите программу, которая принимает на вход число (N) и выдаёт таблицу кубов чисел от 1 до N.
+void Task23()
+{
+    int InputInt(string? value)
+    {
+        int number = 0;
+        { }
+        while (!int.TryParse(value, out number))
+        {
+            Console.Write("Не подходит к требованию введите число: ");
+            value = Console.ReadLine();
+        }
+        return number;
+    }
+     Console.Clear();
+    Console.WriteLine("Задача 23 Напишите программу, которая принимает на вход число (N) и выдаёт таблицу кубов чисел от 1 до N.");
+    Console.Write("Введите число N ");
+    int number = InputInt(Console.ReadLine());
+    if (number > 0)
+    {
+        for (int i = 1; i < number; i++) Console.WriteLine($"{Math.Pow(i, 3)}, ");
+        Console.WriteLine($"{Math.Pow(number, 3)}");
+    }
+    else Console.WriteLine("Не подходит");
+}
 
-
-/////Задача 23 Напишите программу, которая принимает на вход число (N) и выдаёт таблицу кубов чисел от 1 до N.
-// int InputInt(string value)
+// Задача 25: Напишите цикл, который принимает на вход два числа (A и B) и возводит число A в натуральную степень B.
+// 3, 5 -> 243 (3⁵)
+// 2, 4 -> 16
+// Console.WriteLine($"Задача 25. Возведение числа A в натуральную степень B");
+// int numberA = 1;
+// int numberB = 1;
+// int InputInt(string? value)                                               // Проверка что ввели целое число;
 // {
-// int number = 0;{}
-// while (!int.TryParse(value, out number))
-// {
-//     Console.Write("Не подходит к требованию введите число: ");
-//     value = Console.ReadLine();
-// }
-// return number;
-// }
-// Console.Write("Введите число ");
-// int number =InputInt(Console.ReadLine());
-// if (number > 0)
-// {
-//     for (int i = 1; i < number; i++)
+//     int number = 0;
+//     while (!int.TryParse(value, out number))
 //     {
-//         Write($"{Math.Pow(i, 3)}, ");
+//         Console.Write("Не подходит к требованию введите число: ");
+//         value = Console.ReadLine();
 //     }
-//     Write($"{Math.Pow(number, 3)}");
+//     return number;
 // }
-// else
+// void Number(ref int numberA, ref int numberB)                             // Ввод чисел A и B и проверяем натуральное ли число B
 // {
-//     Write("Не подходит");
+//     Console.Write("Введите число A: ");
+//     numberA = InputInt(Console.ReadLine());
+//     Console.Write("Введите число B: ");
+//     numberB = InputInt(Console.ReadLine());
+//     if (numberB < 0)
+//     {
+//         Console.Write("Введите число B: ");
+//         numberB = InputInt(Console.ReadLine());
+//     }
 // }
+
+// int Exponentiation(int numberA, int numberB)                              // Возводим число A в степень числа B или можно просто в Math.Pow
+// {
+//     int result = 1;
+//     for (int i = 1; i <= numberB; i++)
+//     {
+//         result = result * numberA;
+//     }
+//     return result;
+// }
+
+// Number(ref numberA, ref numberB);                                         // Получаем числа
+// Console.WriteLine($"Ответ: {Exponentiation(numberA, numberB)}");          // и ответ
+
+// Задача 27: Напишите программу, которая принимает на вход число и выдаёт сумму цифр в числе.
+// 452 -> 11
+// 82 -> 10
+// 9012 -> 12
+// int InputInt(string? value)                                               // Проверка что ввели целое число;
+// {
+//     int number = 0;
+//     while (!int.TryParse(value, out number))
+//     {
+//         Console.Write("Не подходит к требованию введите число: ");
+//         value = Console.ReadLine();
+//     }
+//     return number;
+// }
+// Console.WriteLine($"Задача 27. Выдаёт сумму цифр в числе");
+// Console.Write("Введите число N: ");
+// int numberN = InputInt(Console.ReadLine());
+
+// int SumNumber(int numberN)
+// {
+//     int counter = Convert.ToString(numberN).Length;                         // узнаем количество цифр в числе
+//     int advance = 0;
+//     int result = 0;
+//     for (int i = 0; i < counter; i++)
+//     {
+//         advance = numberN - numberN % 10;                                   // обнуляем последнею цифру в числе
+//         result = result + (numberN - advance);                              // сумма последних цифр, поэтому будет работать и с отрицательными числами
+//         numberN = numberN / 10;                                             // уменьшаем число на один знак
+//     }
+//     return result;                                                          // конечная сумма всех чисел
+// }
+
+// Console.WriteLine($"Сумма цифр в числе: {SumNumber(numberN)}");
+
+// Задача 29: Напишите программу, которая задаёт массив из 8 элементов и выводит их на экран.
+// 1, 2, 5, 7, 19 -> [1, 2, 5, 7, 19]
+// 6, 1, 33 -> [6, 1, 33]
+// void Massiv()
+// {   Console.WriteLine($"Задача 29. Ряд чисел преобразует в массив");
+//     Console.Write("Введите ряд чисел, разделенных запятой с пробелом: ");
+//     string? number = Console.ReadLine();                                  // Прописываем строку 
+//     string[] num = number.Split(',');                                     // Делим строку на массив
+//     int i = num.Length;                                                   
+//     if (i < 9 && i > 1)                                                   // проверяем массив на количество элементов
+//     {
+//         Console.WriteLine($"[{String.Join(",", num)}]");
+//     }
+//     else
+//     {
+//         Console.WriteLine($"Вы ввели не верный массив");
+//     }
+// }
+
+// Massiv();
 
 
 //// Задача 41 Пользователь вводит с клавиатуры M чисел. Посчитайте, сколько чисел больше 0 ввёл пользователь.
@@ -284,7 +379,8 @@ void CrossPoint()
 void Task47()
 {
     double[,] GetTwoDimensionalArray()
-    {   Console.Clear();
+    {
+        Console.Clear();
         Console.WriteLine($"Задача 47. Задайте двумерный массив размером mxn, заполненный случайными вещественными числами.");
         Console.WriteLine($"Введите через пробел размеры двумерного массива и диапазон чисел, пример: 5 5 1 100 ");
         string? line;
@@ -355,7 +451,14 @@ switch (task)
         Console.Clear();
         Task19();
         break;
-
+    case 21:
+        Console.Clear();
+        Task21();
+        break;
+    case 23:
+        Console.Clear();
+        Task23();
+        break;
     case 41:
         Console.Clear();
         Greater();
