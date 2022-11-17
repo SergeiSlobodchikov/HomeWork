@@ -325,10 +325,7 @@ void Greater()
     int[] ints = Array.ConvertAll(number, int.Parse);
     for (int i = 0; i < ints.Length; i++)
     {
-        if (ints[i] > 0)
-        {
-            greater++;
-        }
+        if (ints[i] > 0) greater++;
     }
     Console.WriteLine($"В массиве [{String.Join(", ", ints)}] num>0 -> {greater}");
 }
@@ -370,7 +367,7 @@ void CrossPoint()
     else
     {
         double x = (b1 - b2) / (k2 - k1);
-        double y = (k2 * b1 - k1 * b2) / (k2 - k1);
+        double y = (k1 * x + b1);
         Console.Write($"Точка пересечения заданных прямых: ({x}; {y})");
     }
 }
@@ -378,11 +375,11 @@ void CrossPoint()
 ////Задача 47. Задайте двумерный массив размером m×n, заполненный случайными вещественными числами.
 void Task47()
 {
-    double[,] GetTwoDimensionalArray()
+    double[,] GetTwoDimensionalArray()  //// Указываем размеры и диапазон массива 
     {
         Console.Clear();
-        Console.WriteLine($"Задача 47. Задайте двумерный массив размером mxn, заполненный случайными вещественными числами.");
-        Console.WriteLine($"Введите через пробел размеры двумерного массива и диапазон чисел, пример: 5 5 1 100 ");
+        Console.WriteLine($"Задача 47. Задайте двумерный массив размером mxn, заполненный случайными вещественными числами.\n"+
+            "Введите через пробел размеры двумерного массива и диапазон чисел, пример: 5 5 1 100 ");
         string? line;
         while ((line = Console.ReadLine()) == null) line = Console.ReadLine();
         string[] values = line.Split(' ');
@@ -390,11 +387,11 @@ void Task47()
         int column = Convert.ToInt32(values[1]);
         int M = Convert.ToInt32(values[2]);
         int N = Convert.ToInt32(values[3]);
-        double[,] massive = function.getRandomTwoDimensionalArrayDouble(row, column, M, N);
+        double[,] massive = function.getRandomTwoDimensionalArrayDouble(row, column, M, N);  //// Создаем массив из библиотеки классов myLib
         return massive;
     }
 
-    void PrintArray(double[,] massive)
+    void PrintArray(double[,] massive)  ////Печатает массив в консоль
     {
         for (int f = 0; f < massive.GetLength(0); f++)
         {
@@ -412,20 +409,23 @@ void Task47()
 ////возвращает значение этого элемента или же указание, что такого элемента нет.
 void Task50()
 {
-    int[,] array = function.getRandomTwoDimensionalArrayInt(10, 10, 1, 100);
+    int[,] array = function.getRandomTwoDimensionalArrayInt(10, 10, 1, 100); //// Создаем массив из библиотеки классов myLib 
 
-    Console.WriteLine("Задача 50. Программа которая на вход принимает позиции элемента в двумерном массиве, и возвращает значение этого элемента или же указание, что такого элемента нет.");
-    Console.WriteLine("Введите через пробел координаты элемента");
+    Console.WriteLine("Задача 50. Программа которая на вход принимает позиции элемента в двумерном массиве, \n" +   
+        "и возвращает значение этого элемента или же указание, что такого элемента нет.\n" +
+        "Задан массив 10х10, введите через пробел координаты элемента X и Y ");
     string? line;
     while ((line = Console.ReadLine()) == null) line = Console.ReadLine();
-    string[] values = line.Split(' ');
+    string[] values = line.Split(' '); 
     int row = Convert.ToInt32(values[0]);
     int column = Convert.ToInt32(values[1]);
-    if (row > 9 || column > 9 || row < 0 || column < 0) Console.WriteLine("Такого элемента нет");
+
+    if (row > 9 || column > 9 || row < 0 || column < 0) Console.WriteLine("Такого элемента нет");   ////проверка позиции
     else Console.WriteLine($"Значение под строкой {row} и столбцом {column} -> {array[row, column]}");
     Console.WriteLine("Показать массив, да нажмите стрелочку ↑ вверх и нет ↓ вниз");
     KeyPressed(Console.ReadKey());
-    void KeyPressed(ConsoleKeyInfo key)
+
+    void KeyPressed(ConsoleKeyInfo key) //// функция для нажатия стрелок
     {
         switch (key.Key)
         {
@@ -436,26 +436,24 @@ void Task50()
                 Console.WriteLine(" Конец ");
                 break;
         }
-        void PrintArray(int[,] massive)
-        {
-            for (int f = 0; f < 10; f++)
-            {
-                Console.WriteLine();
-                for (int j = 0; j < 10; j++) Console.Write(string.Format("{0,3} |", massive[f, j]));
-            }
-        }
-
     }
+
+    void PrintArray(int[,] massive)   ////Печатает массив в консоль
+    {
+        for (int f = 0; f < 10; f++)
+        {
+            Console.WriteLine();
+            for (int j = 0; j < 10; j++) Console.Write(string.Format("{0,3} |", massive[f, j]));
+        }
+    }
+
 }
 
 ////Задача 52. Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце.
 ///Например, задан массив:
-///1 4 7 2
-///5 9 2 3
-///8 4 2 4
 ////Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3.
 void Task52()
-{   
+{
     Console.WriteLine("Задача 52. Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце.");
     Console.WriteLine("Введите через пробел размеры двумерного массива и диапазон чисел, пример: 5 5 1 100 ");
     string? line;
@@ -465,20 +463,20 @@ void Task52()
     int column = Convert.ToInt32(values[1]);
     int M = Convert.ToInt32(values[2]);
     int N = Convert.ToInt32(values[3]);
-    int[,] array = function.getRandomTwoDimensionalArrayInt(row, column, M, N);
-
+    int[,] array = function.getRandomTwoDimensionalArrayInt(row, column, M, N);  //// Создаем массив из библиотеки классов myLib          
 
     for (int i = 0; i < row; i++)
     {
         double sum = 0;
-        for (int j = 0; j < column; j++) sum = sum + Convert.ToDouble(array[j, i]);
+        for (int j = 0; j < column; j++) sum = sum + Convert.ToDouble(array[j, i]); //// сумма столбца
         Console.Write($" {sum / row} |");
     }
     Console.WriteLine();
 
     Console.WriteLine("Показать массив, да нажмите стрелочку ↑ вверх и нет ↓ вниз");
     KeyPressed(Console.ReadKey());
-    void KeyPressed(ConsoleKeyInfo key)
+    
+    void KeyPressed(ConsoleKeyInfo key) //// действия с клавиатурой
     {
         switch (key.Key)
         {
@@ -490,7 +488,7 @@ void Task52()
                 break;
         }
     }
-    void PrintArray(int[,] massive)
+    void PrintArray(int[,] massive) ////Печатает массив в консоль
     {
         for (int f = 0; f < row; f++)
         {
