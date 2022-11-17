@@ -200,7 +200,7 @@ void Task23()
         }
         return number;
     }
-     Console.Clear();
+    Console.Clear();
     Console.WriteLine("Задача 23 Напишите программу, которая принимает на вход число (N) и выдаёт таблицу кубов чисел от 1 до N.");
     Console.Write("Введите число N ");
     int number = InputInt(Console.ReadLine());
@@ -291,7 +291,7 @@ void Task23()
 // Задача 29: Напишите программу, которая задаёт массив из 8 элементов и выводит их на экран.
 // 1, 2, 5, 7, 19 -> [1, 2, 5, 7, 19]
 // 6, 1, 33 -> [6, 1, 33]
-// void Massiv()
+// void Massive()
 // {   Console.WriteLine($"Задача 29. Ряд чисел преобразует в массив");
 //     Console.Write("Введите ряд чисел, разделенных запятой с пробелом: ");
 //     string? number = Console.ReadLine();                                  // Прописываем строку 
@@ -307,7 +307,7 @@ void Task23()
 //     }
 // }
 
-// Massiv();
+// Massive();
 
 
 //// Задача 41 Пользователь вводит с клавиатуры M чисел. Посчитайте, сколько чисел больше 0 ввёл пользователь.
@@ -410,6 +410,97 @@ void Task47()
 
 ////Задача 50. Напишите программу, которая на вход принимает позиции элемента в двумерном массиве, и 
 ////возвращает значение этого элемента или же указание, что такого элемента нет.
+void Task50()
+{
+    int[,] array = function.getRandomTwoDimensionalArrayInt(10, 10, 1, 100);
+
+    Console.WriteLine("Задача 50. Программа которая на вход принимает позиции элемента в двумерном массиве, и возвращает значение этого элемента или же указание, что такого элемента нет.");
+    Console.WriteLine("Введите через пробел координаты элемента");
+    string? line;
+    while ((line = Console.ReadLine()) == null) line = Console.ReadLine();
+    string[] values = line.Split(' ');
+    int row = Convert.ToInt32(values[0]);
+    int column = Convert.ToInt32(values[1]);
+    if (row > 9 || column > 9 || row < 0 || column < 0) Console.WriteLine("Такого элемента нет");
+    else Console.WriteLine($"Значение под строкой {row} и столбцом {column} -> {array[row, column]}");
+    Console.WriteLine("Показать массив, да нажмите стрелочку ↑ вверх и нет ↓ вниз");
+    KeyPressed(Console.ReadKey());
+    void KeyPressed(ConsoleKeyInfo key)
+    {
+        switch (key.Key)
+        {
+            case ConsoleKey.UpArrow:
+                PrintArray(array);
+                break;
+            case ConsoleKey.DownArrow:
+                Console.WriteLine(" Конец ");
+                break;
+        }
+        void PrintArray(int[,] massive)
+        {
+            for (int f = 0; f < 10; f++)
+            {
+                Console.WriteLine();
+                for (int j = 0; j < 10; j++) Console.Write(string.Format("{0,3} |", massive[f, j]));
+            }
+        }
+
+    }
+}
+
+////Задача 52. Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце.
+///Например, задан массив:
+///1 4 7 2
+///5 9 2 3
+///8 4 2 4
+////Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3.
+void Task52()
+{   
+    Console.WriteLine("Задача 52. Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце.");
+    Console.WriteLine("Введите через пробел размеры двумерного массива и диапазон чисел, пример: 5 5 1 100 ");
+    string? line;
+    while ((line = Console.ReadLine()) == null) line = Console.ReadLine();
+    string[] values = line.Split(' ');
+    int row = Convert.ToInt32(values[0]);
+    int column = Convert.ToInt32(values[1]);
+    int M = Convert.ToInt32(values[2]);
+    int N = Convert.ToInt32(values[3]);
+    int[,] array = function.getRandomTwoDimensionalArrayInt(row, column, M, N);
+
+
+    for (int i = 0; i < row; i++)
+    {
+        double sum = 0;
+        for (int j = 0; j < column; j++) sum = sum + Convert.ToDouble(array[j, i]);
+        Console.Write($" {sum / row} |");
+    }
+    Console.WriteLine();
+
+    Console.WriteLine("Показать массив, да нажмите стрелочку ↑ вверх и нет ↓ вниз");
+    KeyPressed(Console.ReadKey());
+    void KeyPressed(ConsoleKeyInfo key)
+    {
+        switch (key.Key)
+        {
+            case ConsoleKey.UpArrow:
+                PrintArray(array);
+                break;
+            case ConsoleKey.DownArrow:
+                Console.WriteLine(" Конец ");
+                break;
+        }
+    }
+    void PrintArray(int[,] massive)
+    {
+        for (int f = 0; f < row; f++)
+        {
+            Console.WriteLine();
+            for (int j = 0; j < row; j++) Console.Write(string.Format("{0,4} |", massive[f, j]));
+        }
+    }
+
+}
+
 
 
 
@@ -470,5 +561,13 @@ switch (task)
     case 47:
         Console.Clear();
         Task47();
+        break;
+    case 50:
+        Console.Clear();
+        Task50();
+        break;
+    case 52:
+        Console.Clear();
+        Task52();
         break;
 }
