@@ -420,7 +420,7 @@ void Task50()
     int row = Convert.ToInt32(values[0]);
     int column = Convert.ToInt32(values[1]);
 
-    if (row > 10-1 || column > 10-1 || row < 0 || column < 0) Console.WriteLine("Такого элемента нет");   ////проверка позиции
+    if (row > array.GetLength(0) - 1|| column > array.GetLength(1) - 1 || row < 0 || column < 0) Console.WriteLine("Такого элемента нет");   ////проверка позиции
     else Console.WriteLine($"Значение под строкой {row} и столбцом {column} -> {array[row, column]}");
     Console.WriteLine("Показать массив, да нажмите стрелочку ↑ вверх и нет ↓ вниз");
     KeyPressed(Console.ReadKey());
@@ -498,9 +498,6 @@ void Task52()
     }
 
 }
-
-
-
 
 
 Console.Clear();
