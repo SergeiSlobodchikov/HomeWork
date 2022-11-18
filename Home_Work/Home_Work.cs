@@ -378,7 +378,7 @@ void Task47()
     double[,] GetTwoDimensionalArray()  //// Указываем размеры и диапазон массива 
     {
         Console.Clear();
-        Console.WriteLine($"Задача 47. Задайте двумерный массив размером mxn, заполненный случайными вещественными числами.\n"+
+        Console.WriteLine($"Задача 47. Задайте двумерный массив размером mxn, заполненный случайными вещественными числами.\n" +
             "Введите через пробел размеры двумерного массива и диапазон чисел, пример: 5 5 1 100 ");
         string? line;
         while ((line = Console.ReadLine()) == null) line = Console.ReadLine();
@@ -411,16 +411,16 @@ void Task50()
 {
     int[,] array = function.getRandomTwoDimensionalArrayInt(10, 10, 1, 100); //// Создаем массив из библиотеки классов myLib 
 
-    Console.WriteLine("Задача 50. Программа которая на вход принимает позиции элемента в двумерном массиве, \n" +   
+    Console.WriteLine("Задача 50. Программа которая на вход принимает позиции элемента в двумерном массиве, \n" +
         "и возвращает значение этого элемента или же указание, что такого элемента нет.\n" +
         "Задан массив 10х10, введите через пробел координаты элемента X и Y ");
     string? line;
     while ((line = Console.ReadLine()) == null) line = Console.ReadLine();
-    string[] values = line.Split(' '); 
+    string[] values = line.Split(' ');
     int row = Convert.ToInt32(values[0]);
     int column = Convert.ToInt32(values[1]);
 
-    if (row > 9 || column > 9 || row < 0 || column < 0) Console.WriteLine("Такого элемента нет");   ////проверка позиции
+    if (row > row - 1 || column > column - 1 || row < 0 || column < 0) Console.WriteLine("Такого элемента нет");   ////проверка позиции
     else Console.WriteLine($"Значение под строкой {row} и столбцом {column} -> {array[row, column]}");
     Console.WriteLine("Показать массив, да нажмите стрелочку ↑ вверх и нет ↓ вниз");
     KeyPressed(Console.ReadKey());
@@ -465,17 +465,17 @@ void Task52()
     int N = Convert.ToInt32(values[3]);
     int[,] array = function.getRandomTwoDimensionalArrayInt(row, column, M, N);  //// Создаем массив из библиотеки классов myLib          
 
-    for (int i = 0; i < row; i++)
+    for (int i = 0; i < column; i++)
     {
         double sum = 0;
-        for (int j = 0; j < column; j++) sum = sum + Convert.ToDouble(array[j, i]); //// сумма столбца
-        Console.Write($" {sum / row} |");
+        for (int j = 0; j < row; j++) sum = sum + Convert.ToDouble(array[j, i]); //// сумма столбца
+        Console.Write(string.Format("{0,4:0.##} |", sum / row));
     }
     Console.WriteLine();
 
     Console.WriteLine("Показать массив, да нажмите стрелочку ↑ вверх и нет ↓ вниз");
     KeyPressed(Console.ReadKey());
-    
+
     void KeyPressed(ConsoleKeyInfo key) //// действия с клавиатурой
     {
         switch (key.Key)
@@ -493,7 +493,7 @@ void Task52()
         for (int f = 0; f < row; f++)
         {
             Console.WriteLine();
-            for (int j = 0; j < row; j++) Console.Write(string.Format("{0,4} |", massive[f, j]));
+            for (int j = 0; j < column; j++) Console.Write(string.Format("{0,4} |", massive[f, j]));
         }
     }
 
