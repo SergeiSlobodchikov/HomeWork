@@ -52,16 +52,25 @@ public class function
         num2 = Convert.ToInt32(values[1]);
     }
 
-    
-    public static void  PrintIntTwoDimArray(int[,] array)
-    {
-    for (int x = 0; x < array.GetLength(0); x++)
-    {   Console.WriteLine("");
-        for (int y = 0; y < array.GetLength(1); y++)
-        {
-            Console.Write(string.Format("{0,4:00} |", array[x, y]));
-        }
-        Console.WriteLine("");
-    }}
 
+    public static void PrintIntTwoDimArray(int[,] array)
+    {
+        for (int x = 0; x < array.GetLength(0); x++)
+        {
+            Console.WriteLine("");
+            for (int y = 0; y < array.GetLength(1); y++)
+            {
+                Console.Write(string.Format("{0,4:00} |", array[x, y]));
+            }
+            Console.WriteLine("");
+        }
+    }
+
+    public static void SwapValuesInt(int num1, int num2)
+    {
+        int value = num1;
+        num1 = num2;
+        num2 = value;
+    }
+ 
 }

@@ -498,20 +498,106 @@ void Task52()
     }
 
 }
+// Задача 54: Задайте двумерный массив. Напишите программу, которая упорядочит по убыванию элементы каждой строки двумерного массива.
+// Например, задан массив:
+// 1 4 7 2
+// 5 9 2 3
+// 8 4 2 4
+// В итоге получается вот такой массив:
+// 7 4 2 1
+// 9 5 3 2
+// 8 4 4 2
+void Task54()
+{
+    int row = 0, column = 0, x = 1, y = 100;
+    Console.WriteLine("Задача 54: Задайте двумерный массив. Напишите программу, которая упорядочит по убыванию элементы каждой строки двумерного массива.\n" +
+                    "Укажите размер массива");
+    function.TwoNumbersFromString(ref row, ref column);
+    int[,] array = function.getRandomTwoDimensionalArrayInt(row, column, x, y);
+    function.PrintIntTwoDimArray(array);
+
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+
+            if (j < array.GetLength(1) - 1 && array[i, j] < array[i, j + 1])
+            {
+                if (array[i, j + 1] > array[i, 0])
+                {
+                    int value = array[i, 0];
+                    array[i, 0] = array[i, j + 1];
+                    array[i, j + 1] = value;
+                }
+                else
+                {
+                    int value = array[i, j];
+                    array[i, j] = array[i, j + 1];
+                    array[i, j + 1] = value;
+                }
+                j = 0;
+            }
+        }
+    }
+    Console.WriteLine();
+    function.PrintIntTwoDimArray(array);
+}
+
+// Задача 56: Задайте прямоугольный двумерный массив. Напишите программу, которая будет находить строку с наименьшей суммой элементов.
+void Task56()
+{
+int[] SumOfLines(int[,] twoArray)
+{
+    int[] arrayOneDim = new int[twoArray.GetLength(0)];
+    for (int i = 0; i < twoArray.GetLength(0); i++)
+    {
+        int sum = 0;
+        for (int j = 0; j < twoArray.GetLength(1); j++) sum = sum + twoArray[i, j];
+        arrayOneDim[i] = sum;
+    }
+    Console.WriteLine();
+    return arrayOneDim;
+}
+
+void StringPointer(int[] array)
+{
+    int number = array[0], counter = 0;
+    Console.Write($"Сумма строк:");
+    for (int i = 0; i < array.Length; i++)
+    {
+        if (number > array[i])
+        {
+            number = array[i];
+            counter = i;
+        }
+        Console.Write($" {array[i]} ");
+    }
+    Console.WriteLine();
+    Console.WriteLine($"Наименьший строка {counter}  ");
+}
+
+
+int row = 0, column = 0;
+function.TwoNumbersFromString(ref row, ref column);
+int[,] arrayTwoDim = function.getRandomTwoDimensionalArrayInt(row, column, 1, 10);
+function.PrintIntTwoDimArray(arrayTwoDim);
+int[] arrayOneDim = SumOfLines(arrayTwoDim);
+StringPointer(arrayOneDim);
+}
+
 // Задача 62. Напишите программу, которая заполнит спирально массив 4 на 4.
 // Например, на выходе получается вот такой массив:
 // 01 02 03 04
 // 12 13 14 05
 // 11 16 15 06
 // 10 09 08 07
-
 void Task62()
 {
     int row = 0, column = 0;
     Console.WriteLine("Задача 62. Напишите программу, которая заполнит спирально массив 4 на 4.\n" +
                     "Укажите размер массива");
     function.TwoNumbersFromString(ref row, ref column);
-    
+
     int[,] array = new int[row, column];
     int numRow = array.GetLength(0), numColumn = array.GetLength(1);
     int upLeftCorner = 0, downRightCorner = 0, downLeftCorner = 0, upRightCorner = 0;
@@ -607,6 +693,14 @@ switch (task)
     case 52:
         Console.Clear();
         Task52();
+        break;
+    case 54:
+        Console.Clear();
+        Task54();
+        break;
+    case 56:
+        Console.Clear();
+        Task56();
         break;
     case 62:
         Console.Clear();
