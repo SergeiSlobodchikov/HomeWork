@@ -22,12 +22,46 @@ public class function
         {
             for (int j = 0; j < column; j++)
             {
-                result[i, j] = Convert.ToDouble(new Random().Next(ofX, toY+1)) / 100;
+                result[i, j] = Convert.ToDouble(new Random().Next(ofX, toY + 1)) / 100;
             }
-           
-        } 
+
+        }
         return result;
     }
 
+
+    public static void TwoNumbersFromString(ref int num1, ref int num2)
+    {
+        Console.WriteLine("Укажите первое число и второе через пробел \n" +
+                        "пример: 10 22");
+        string? line;
+        while ((line = Console.ReadLine()) == null) line = Console.ReadLine();
+        string[] values = line.Split(' ');
+        int numericValue;
+        for (int i = 0; i < values.Length; i++)
+        {
+            bool isNumber = int.TryParse(values[i], out numericValue);
+            if (!isNumber)
+            {
+                Console.WriteLine("Вы ввели не правильно строку");
+                TwoNumbersFromString(ref num1, ref num2);
+                return;
+            }
+        }
+        num1 = Convert.ToInt32(values[0]);
+        num2 = Convert.ToInt32(values[1]);
+    }
+
     
+    public static void  PrintIntTwoDimArray(int[,] array)
+    {
+    for (int x = 0; x < array.GetLength(0); x++)
+    {   Console.WriteLine("");
+        for (int y = 0; y < array.GetLength(1); y++)
+        {
+            Console.Write(string.Format("{0,4:00} |", array[x, y]));
+        }
+        Console.WriteLine("");
+    }}
+
 }

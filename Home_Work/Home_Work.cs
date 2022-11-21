@@ -420,7 +420,7 @@ void Task50()
     int row = Convert.ToInt32(values[0]);
     int column = Convert.ToInt32(values[1]);
 
-    if (row > array.GetLength(0) - 1|| column > array.GetLength(1) - 1 || row < 0 || column < 0) Console.WriteLine("Такого элемента нет");   ////проверка позиции
+    if (row > array.GetLength(0) - 1 || column > array.GetLength(1) - 1 || row < 0 || column < 0) Console.WriteLine("Такого элемента нет");   ////проверка позиции
     else Console.WriteLine($"Значение под строкой {row} и столбцом {column} -> {array[row, column]}");
     Console.WriteLine("Показать массив, да нажмите стрелочку ↑ вверх и нет ↓ вниз");
     KeyPressed(Console.ReadKey());
@@ -498,9 +498,52 @@ void Task52()
     }
 
 }
+// Задача 62. Напишите программу, которая заполнит спирально массив 4 на 4.
+// Например, на выходе получается вот такой массив:
+// 01 02 03 04
+// 12 13 14 05
+// 11 16 15 06
+// 10 09 08 07
+
+void Task62()
+{
+    int row = 0, column = 0;
+    Console.WriteLine("Задача 62. Напишите программу, которая заполнит спирально массив 4 на 4.\n" +
+                    "Укажите размер массива");
+    function.TwoNumbersFromString(ref row, ref column);
+    
+    int[,] array = new int[row, column];
+    int numRow = array.GetLength(0), numColumn = array.GetLength(1);
+    int upLeftCorner = 0, downRightCorner = 0, downLeftCorner = 0, upRightCorner = 0;
+    int counter = 1;
+    int i = 0;
+    int j = 0;
+
+    while (counter <= numRow * numColumn)
+    {
+        array[i, j] = counter;
+        if (i == upLeftCorner && j < numColumn - upRightCorner - 1) j++;
+        else if (j == numColumn - upRightCorner - 1 && i < numRow - downRightCorner - 1) i++;
+        else if (i == numRow - downRightCorner - 1 && j > downLeftCorner) j--;
+        else i--;
+
+        if ((i == upLeftCorner + 1) && (j == downLeftCorner) && (downLeftCorner != numColumn - upRightCorner - 1))
+        {
+            upLeftCorner++;
+            downRightCorner++;
+            downLeftCorner++;
+            upRightCorner++;
+        }
+        counter++;
+    }
+
+    function.PrintIntTwoDimArray(array);
+}
 
 
-Console.Clear();
+
+
+// Console.Clear();
 Console.Write($"Введите номер задания: ");
 int task = Convert.ToInt32(Console.ReadLine());
 switch (task)
@@ -564,5 +607,9 @@ switch (task)
     case 52:
         Console.Clear();
         Task52();
+        break;
+    case 62:
+        Console.Clear();
+        Task62();
         break;
 }
