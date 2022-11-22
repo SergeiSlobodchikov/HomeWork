@@ -72,5 +72,14 @@ public class function
         num1 = num2;
         num2 = value;
     }
+
+    public static void Color(string color)
+    {
+        if (color == "green") Console.ForegroundColor = ConsoleColor.Green;
+        else if (color == "red") Console.ForegroundColor = ConsoleColor.Red;
+        else if (color == "yellow") Console.ForegroundColor = ConsoleColor.Yellow;
+        else if (color == "cyan") Console.ForegroundColor = ConsoleColor.Cyan;
+        else if (color == "magenta") Console.ForegroundColor = ConsoleColor.Magenta;
+    }
  
 }
