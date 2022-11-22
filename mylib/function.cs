@@ -33,7 +33,7 @@ public class function
     public static void TwoNumbersFromString(ref int num1, ref int num2)
     {
         Console.WriteLine("Укажите первое число и второе через пробел \n" +
-                        "пример: 10 22");
+                        "пример: 1 9");
         string? line;
         while ((line = Console.ReadLine()) == null) line = Console.ReadLine();
         string[] values = line.Split(' ');

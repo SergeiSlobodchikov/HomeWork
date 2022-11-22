@@ -546,43 +546,145 @@ void Task54()
 // Задача 56: Задайте прямоугольный двумерный массив. Напишите программу, которая будет находить строку с наименьшей суммой элементов.
 void Task56()
 {
-int[] SumOfLines(int[,] twoArray)
-{
-    int[] arrayOneDim = new int[twoArray.GetLength(0)];
-    for (int i = 0; i < twoArray.GetLength(0); i++)
+    int[] SumOfLines(int[,] twoArray)
     {
-        int sum = 0;
-        for (int j = 0; j < twoArray.GetLength(1); j++) sum = sum + twoArray[i, j];
-        arrayOneDim[i] = sum;
-    }
-    Console.WriteLine();
-    return arrayOneDim;
-}
-
-void StringPointer(int[] array)
-{
-    int number = array[0], counter = 0;
-    Console.Write($"Сумма строк:");
-    for (int i = 0; i < array.Length; i++)
-    {
-        if (number > array[i])
+        int[] arrayOneDim = new int[twoArray.GetLength(0)];
+        for (int i = 0; i < twoArray.GetLength(0); i++)
         {
-            number = array[i];
-            counter = i;
+            int sum = 0;
+            for (int j = 0; j < twoArray.GetLength(1); j++) sum = sum + twoArray[i, j];
+            arrayOneDim[i] = sum;
         }
-        Console.Write($" {array[i]} ");
+        Console.WriteLine();
+        return arrayOneDim;
     }
-    Console.WriteLine();
-    Console.WriteLine($"Наименьший строка {counter}  ");
+
+    void StringPointer(int[] array)
+    {
+        int number = array[0], counter = 0;
+        Console.Write($"Сумма строк:");
+        for (int i = 0; i < array.Length; i++)
+        {
+            if (number > array[i])
+            {
+                number = array[i];
+                counter = i;
+            }
+            Console.Write($" {array[i]} ");
+        }
+        Console.WriteLine();
+        Console.WriteLine($"Наименьший строка {counter}  ");
+
+
+        int row = 0, column = 0;
+        function.TwoNumbersFromString(ref row, ref column);
+        int[,] arrayTwoDim = function.getRandomTwoDimensionalArrayInt(row, column, 1, 10);
+        function.PrintIntTwoDimArray(arrayTwoDim);
+        int[] arrayOneDim = SumOfLines(arrayTwoDim);
+        StringPointer(arrayOneDim);
+    }
 }
 
+////Задача 58: Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.
+void Task58()
+{
+    void MatrixMultiplication(int[,] arrayOne, int[,] arrayTwo)
+    {
+        int[,] matrix = new int[arrayOne.GetLength(0), arrayTwo.GetLength(1)];
+        for (int i = 0; i < arrayOne.GetLength(0); i++)
+        {
+            for (int j = 0; j < arrayTwo.GetLength(1); j++)
+            {
+                for (int z = 0; z < arrayTwo.GetLength(0); z++)
+                {
+                    matrix[i, j] += arrayOne[i, z] * arrayTwo[z, j];
+                }
+            }
+        }
+        function.PrintIntTwoDimArray(matrix);
+    }
 
-int row = 0, column = 0;
-function.TwoNumbersFromString(ref row, ref column);
-int[,] arrayTwoDim = function.getRandomTwoDimensionalArrayInt(row, column, 1, 10);
-function.PrintIntTwoDimArray(arrayTwoDim);
-int[] arrayOneDim = SumOfLines(arrayTwoDim);
-StringPointer(arrayOneDim);
+    Console.WriteLine("Задача 58: Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.");
+    int row = 0, column = 0;
+    function.TwoNumbersFromString(ref row, ref column);
+    int[,] arrayTwoDimOne = function.getRandomTwoDimensionalArrayInt(row, column, 1, 10);
+    function.PrintIntTwoDimArray(arrayTwoDimOne);
+    Console.WriteLine("Матрица А");
+    Console.WriteLine();
+    function.TwoNumbersFromString(ref row, ref column);
+    int[,] arrayTwoDimTwo = function.getRandomTwoDimensionalArrayInt(row, column, 1, 10);
+    function.PrintIntTwoDimArray(arrayTwoDimTwo);
+    Console.WriteLine("Матрица B");
+    Console.WriteLine();
+    if (arrayTwoDimOne.GetLength(1) != arrayTwoDimTwo.GetLength(0)) Console.WriteLine("Количество столбцов первой матрицы и строк второй должны быть одинаковыми");
+    else
+    {
+        MatrixMultiplication(arrayTwoDimOne, arrayTwoDimTwo);
+        Console.WriteLine("Матрица C=A*B");
+    }
+}
+// Задача 60. ...Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента.
+// Массив размером 2 x 2 x 2
+// 66(0,0,0) 25(0,1,0)
+// 34(1,0,0) 41(1,1,0)
+// 27(0,0,1) 90(0,1,1)
+// 26(1,0,1) 55(1,1,1)
+void Task60()
+{
+
+    void Random(int[,,] array, int i, int j, int k)
+    {
+        for (int x = 0; x < array.GetLength(0); x++)
+        {
+            for (int y = 0; y < array.GetLength(1); y++)
+            {
+                for (int z = 0; z < array.GetLength(2); z++)
+                {
+                    if (array[i, j, k] == array[x, y, z] && i == x && j == y && k == z)
+                    {
+                        array[i, j, k] = array[x, y, z];
+                    }
+                    else if (array[i, j, k] == array[x, y, z])
+                    {
+                        array[i, j, k] = new Random().Next(10, 100);
+                        x = 0; y = 0; z = 0;
+                    }
+                }
+            }
+        }
+    }
+
+    int[,,] ThreeDimensionalArray = new int[2, 2, 2];
+
+    for (int i = 0; i < ThreeDimensionalArray.GetLength(0); i++)
+    {
+        for (int j = 0; j < ThreeDimensionalArray.GetLength(1); j++)
+        {
+            for (int k = 0; k < ThreeDimensionalArray.GetLength(2); k++)
+            {
+                ThreeDimensionalArray[i, j, k] = new Random().Next(10, 100);
+                Random(ThreeDimensionalArray, i, j, k);
+
+            }
+        }
+    }
+
+    Console.WriteLine($"Задача 60. ...Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу\n" +
+     "которая будет построчно выводить массив, добавляя индексы каждого элемента.");
+    for (int i = 0; i < ThreeDimensionalArray.GetLength(0); i++)
+    {
+        for (int j = 0; j < ThreeDimensionalArray.GetLength(1); j++)
+        {
+            for (int k = 0; k < ThreeDimensionalArray.GetLength(2); k++)
+            {
+                
+                Console.WriteLine($"{ThreeDimensionalArray[i, j, k]} ({i},{j},{k}) {ThreeDimensionalArray[i,j+1,k]} ({i},{j+1},{k})");
+              }   
+         j++;     
+        }
+    
+    }
+
 }
 
 // Задача 62. Напишите программу, которая заполнит спирально массив 4 на 4.
@@ -701,6 +803,14 @@ switch (task)
     case 56:
         Console.Clear();
         Task56();
+        break;
+    case 58:
+        Console.Clear();
+        Task58();
+        break;
+    case 60:
+        Console.Clear();
+        Task60();
         break;
     case 62:
         Console.Clear();
