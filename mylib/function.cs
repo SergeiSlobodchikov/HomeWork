@@ -82,4 +82,33 @@ public class function
         else if (color == "magenta") Console.ForegroundColor = ConsoleColor.Magenta;
     }
  
+
+ public static int Number()
+    {
+        function.Color("yellow");
+        string? number = Console.ReadLine();
+        while (!int.TryParse(number, out int num) || num < 1)
+        {
+            function.Color("red");
+            Console.Write("Нужно ввести число больше 0, Попробуйте снова: ");
+            function.Color("yellow");
+            number = Console.ReadLine();
+        }
+        int result = int.Parse(number);
+        return result;
+    }
+    public static int NumberZero()
+    {
+        function.Color("yellow");
+        string? number = Console.ReadLine();
+        while (!int.TryParse(number, out int num) || num < 0)
+        {
+            function.Color("red");
+            Console.Write("Нужно ввести число больше 0, Попробуйте снова: ");
+            function.Color("yellow");
+            number = Console.ReadLine();
+        }
+        int result = int.Parse(number);
+        return result;
+    }
 }

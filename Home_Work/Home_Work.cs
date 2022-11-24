@@ -736,11 +736,123 @@ void Task62()
 
     function.PrintIntTwoDimArray(array);
 }
+//     Задача 64: Задайте значение N. Напишите программу, которая выведет все натуральные числа в промежутке от N до 1. Выполнить с помощью рекурсии.
+
+// N = 5 -> "5, 4, 3, 2, 1"
+// N = 8 -> "8, 7, 6, 5, 4, 3, 2, 1"
+void Task64()
+{
+function.Color("yellow");
+Console.WriteLine(" Задача 64: Задайте значение N. Напишите программу, которая выведет все натуральные числа в промежутке от N до 1. Выполнить с помощью рекурсии.\n"+
+                    "Задайте значения N. Программа выведет все натуральные числа от N до 1.");
+Console.WriteLine();
+
+function.Color("green");
+Console.Write("Введите число N: ");
+int N = function.Number();
+
+void Recursion(int number)
+{   Console.Write($"{number} ");
+    if(number==1) return;
+    else number--;
+    Recursion(number);
+}
+
+Recursion(N);
+Console.ResetColor();
+}
+
+// Задача 66: Задайте значения M и N. Напишите программу, которая найдёт сумму натуральных элементов в промежутке от M до N.
+// M = 1; N = 15 -> 120
+// M = 4; N = 8. -> 30
+void Task66()
+{
+function.Color("yellow");
+Console.WriteLine(" Задача 66: Задайте значения M и N. Напишите программу, которая найдёт сумму натуральных элементов в промежутке от M до N.\n" +
+                    "Задайте значения M и N. Программа выведет сумму всех натуральных чисел от M до N.");
+Console.WriteLine();
+
+function.Color("green");
+Console.Write("Введите число M: ");
+int M = function.Number();
+
+function.Color("green");
+Console.Write("Введите число N: ");
+int N = function.Number();
+int counter = 0, difference = 0, sum = 0;
+
+if (M > N) difference = M - N;
+else difference = N - M;
+
+void Sum(int number1, int number2, ref int sum)
+{
+    if (counter == difference + 1) return;
+    else if (number1 < number2)
+    {
+        sum = sum + number1 + counter;
+    }
+    else if (number1 > number2)
+    {
+        sum = sum + number1 - counter;
+    }
+    counter++;
+    Sum(number1, number2, ref sum);
+}
+
+Sum(M, N, ref sum);
+Console.WriteLine($"Сумма натуральных элементов в промежутке от M до N = {sum}");
+Console.ResetColor();
+}
+// Задача 68: Напишите программу вычисления функции Аккермана с помощью рекурсии. Даны два неотрицательных числа m и n.
+// m = 2, n = 3 -> A(m,n) = 9
+// m = 3, n = 2 -> A(m,n) = 29
+void Task68()
+{
+function.Color("yellow");
+Console.WriteLine(" Задача 68: Напишите программу вычисления функции Аккермана с помощью рекурсии. Даны два неотрицательных числа m и n.\n" +
+                    "Задайте значения M и N. Программа выведет вычисления функции Аккермана.");
+Console.WriteLine();
+
+function.Color("green");
+Console.Write("Введите число M рекомендация не более 3: ");
+int m = function.NumberZero();
+
+function.Color("green");
+Console.Write("Введите число N рекомендация не более 5: ");
+int n = function.NumberZero();
+
+if (m > 3)
+{
+    m = 4;
+    n = 0;
+    Console.WriteLine("число M: 4\n" +
+   "число N: 0");
+}
+else if(n>5)
+{
+n = 5;
+    Console.WriteLine($"число M: {m}\n" +
+   "число N: 5");
+}
+
+static int Akkerman(int m, int n)
+{
+    if (m == 0) return n + 1;
+    else
+    {
+        if (m != 0 && n == 0) return Akkerman(m - 1, 1);
+        else return Akkerman(m - 1, Akkerman(m, n - 1));
+    }
+}
+
+int akkerman = Akkerman(m, n);
+Console.WriteLine($"A(m,n): {akkerman}");
+Console.ResetColor();
+}
 
 
 
-
-// Console.Clear();
+Console.Clear();
 Console.Write($"Введите номер задания: ");
 int task = Convert.ToInt32(Console.ReadLine());
 switch (task)
@@ -824,5 +936,17 @@ switch (task)
     case 62:
         Console.Clear();
         Task62();
+        break;
+    case 64:
+        Console.Clear();
+        Task64();
+        break;
+    case 66:
+        Console.Clear();
+        Task66();
+        break;
+    case 68:
+        Console.Clear();
+        Task68();
         break;
 }
